@@ -2,6 +2,7 @@ package net.javalearner.springboot_restful_api.controller;
 
 
 import lombok.AllArgsConstructor;
+import net.javalearner.springboot_restful_api.controller.dto.UserDto;
 import net.javalearner.springboot_restful_api.services.UserService;
 //import org.apache.catalina.User;
 import net.javalearner.springboot_restful_api.entity.User;
@@ -24,9 +25,9 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
 
-        User savedUser = userService.createService(user);
+        UserDto savedUser = userService.createService(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

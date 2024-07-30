@@ -1,6 +1,7 @@
 package net.javalearner.springboot_restful_api.services.impl;
 
 import lombok.AllArgsConstructor;
+import net.javalearner.springboot_restful_api.controller.dto.UserDto;
 import net.javalearner.springboot_restful_api.entity.User;
 import net.javalearner.springboot_restful_api.repository.UserRepository;
 import net.javalearner.springboot_restful_api.services.UserService;
@@ -19,9 +20,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+//    @Override
+//    public User createService(User user) {
+//        return userRepository.save(user);
+//    }
+
     @Override
-    public User createService(User user) {
-        return userRepository.save(user);
+    public UserDto createService(UserDto userDto) {
+        //convert UserDto into user JPA Entity
+        User user = new User(
+                userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getEmailId()
+        )
+        User savedUser =  userRepository.save(user);
+
+        // convert User jpa entity to UserDto
+
+        UserDto savedUserDto = new UserDto(
+                savedUser.getId(),
+                savedUser.getFirstName(),
+                savedUser.getLastName(),
+               savedUser.getEmailId()
+        );
+        return  savedUserDto;
     }
 
     @Override
