@@ -33,23 +33,23 @@ public class UserController {
 
 
     @GetMapping("{Id}")
-    public ResponseEntity<User> getUserById(@PathVariable("Id") Long userId){
-        User getUserData = userService.getUserById(userId);
+    public ResponseEntity<UserDto> getUserById(@PathVariable("Id") Long userId){
+        UserDto getUserData = userService.getUserById(userId);
         return new ResponseEntity<>(getUserData,HttpStatus.OK);
     }
 
     @GetMapping("get")
-    public ResponseEntity<List<User>> getAllUser(){
-        List<User> userList = userService.getAllUser();
+    public ResponseEntity<List<UserDto>> getAllUser(){
+        List<UserDto> userList = userService.getAllUser();
         return new ResponseEntity<>(userList,HttpStatus.OK);
     }
 
 
 
     @PutMapping("{Id}")
-    public ResponseEntity<User> updateUser(@PathVariable("Id") Long userId ,@RequestBody User user){
+    public ResponseEntity<UserDto> updateUser(@PathVariable("Id") Long userId ,@RequestBody UserDto user){
         user.setId(userId);
-         User updatedUser = userService.updateUser(user);
+         UserDto updatedUser = userService.updateUser(user);
          return new ResponseEntity<>(updatedUser,HttpStatus.CREATED);
     }
 }
