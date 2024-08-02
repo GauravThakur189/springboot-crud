@@ -1,6 +1,7 @@
 package net.javalearner.springboot_restful_api.controller;
 
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.javalearner.springboot_restful_api.controller.dto.UserDto;
 import net.javalearner.springboot_restful_api.exception.ErrorDetails;
@@ -29,7 +30,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+    public ResponseEntity<UserDto> createUser(@Valid  @RequestBody UserDto user){
 
         UserDto savedUser = userService.createService(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
@@ -51,7 +52,7 @@ public class UserController {
 
 
     @PutMapping("{Id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("Id") Long userId ,@RequestBody UserDto user){
+    public ResponseEntity<UserDto> updateUser(@PathVariable("Id") Long userId ,@Valid @RequestBody UserDto user){
         user.setId(userId);
          UserDto updatedUser = userService.updateUser(user);
          return new ResponseEntity<>(updatedUser,HttpStatus.CREATED);
